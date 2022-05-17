@@ -37,6 +37,7 @@ const NavBar = () => {
   };
 
   return (
+    <>
     <AppBar position="static" color="success">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -159,6 +160,8 @@ const NavBar = () => {
         </Toolbar>
       </Container>
     </AppBar>
+    </>
+    
   );
 };
 
