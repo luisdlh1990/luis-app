@@ -1,14 +1,14 @@
 import '../App.css'
 
-const Item =({producto})=>{
-    const {tittle, price, url} = producto;
+const ItemDetail =({item})=>{
+    const {tittle, price, url} = item;
     return(
         <>  
             
-            <div className='container-p'>
+            <div>
             <h4>{tittle}</h4>
             <div>
-                <img src={url} alt={tittle} width='150px' height='150px'/>
+                <img src={url} alt={tittle} width='200px' height='200px'/>
             </div>
             <h5>Precio: ${price}</h5>                
             </div>
@@ -19,4 +19,4 @@ const Item =({producto})=>{
 };
 
 
-export default Item;
+export default ItemDetail;
