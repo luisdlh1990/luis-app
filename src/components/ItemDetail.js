@@ -24,7 +24,7 @@ const ItemDetail =({item})=>{
             {
                 itemCount === 0
                 ? <ItemCount initial={itemCount} onAdd={onAdd} />
-                : <Link to='/cart'><button>CheckOut</button></Link>
+                : <Link to='/cart'><button>Finalizar Compra</button></Link>
             }        
             </div>
 
