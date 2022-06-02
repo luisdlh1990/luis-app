@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom';
 import ItemDetail from './ItemDetail';
-import ItemCount from './ItemCount';
+
 const productos = require('./productos').default;
 
 
@@ -29,13 +29,11 @@ data(2000, productos.find(item => item.id === parseInt(id)))
     .catch(err => console.log(err))
 },[]);
 
-const onAdd = (add) => {
-    alert(`You have selected ${add} items`);
-}
+
     return (
         <>
         <ItemDetail item={dato}/>
-        <ItemCount  stock={5} initial ={1} onAdd={onAdd}/>
+        
         </>
 
     )

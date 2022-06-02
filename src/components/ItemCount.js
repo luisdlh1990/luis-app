@@ -4,7 +4,7 @@ import '../App.css'
 
 
 
-const ItemCount = ({ stock = 0, initial = 1,  onAdd }) => {
+const ItemCount = ({ stock = 100, initial = 0,  onAdd }) => {
     const [add, setAdd] = useState(0);
     
 

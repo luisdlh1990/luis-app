@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import ItemCount from "./ItemCount";
+//import { useParams } from "react-router-dom";
 import ItemList from "./ItemList";
 const productos = require('./productos').default;
 
@@ -29,10 +28,7 @@ const getData = new Promise ((resolve, reject)=>{
         .catch((err)=> console.log(err))
         .finally(()=>setLoading(false))
     }, [])
-    const onAdd = (add) => {
-        alert(`You have selected ${add} items`);
-    }
-    
+
 
 
     return(
@@ -40,7 +36,7 @@ const getData = new Promise ((resolve, reject)=>{
         <h2>lista de productos</h2>
         {loading ? <img src="https://thumbs.gfycat.com/GeneralUnpleasantApisdorsatalaboriosa-size_restricted.gif" alt="cargando..."/> :<ItemList listaProductos={listaProductos}/> }
         
-        <ItemCount  stock={5} initial ={1} onAdd={onAdd}/>
+        
        </> 
     );
 }
