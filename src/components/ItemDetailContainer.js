@@ -8,7 +8,7 @@ const productos = require('./productos').default;
 const ItemDetailContainer = () =>{
 const [dato, setDato] = useState({});
 const {id} = useParams();
-
+const [loading, setLoading] = useState(false);
 
 useEffect(()=>{
 let isok = true;
@@ -24,18 +24,25 @@ const data = (time, task) => {
         }, time);
     });
 }
+setLoading(true)
 data(2000, productos.find(item => item.id === parseInt(id)))
+    
     .then((res) => setDato(res))
     .catch(err => console.log(err))
-},[]);
+    .finally(()=>setLoading(false))
+},[id]);
 
 
     return (
         <>
-        <ItemDetail item={dato}/>
+                
+                
+                
+                {loading ? <img src="https://thumbs.gfycat.com/GeneralUnpleasantApisdorsatalaboriosa-size_restricted.gif" alt="cargando..."/> : <ItemDetail item={dato}/>}
+        
+        
         
         </>
-
     )
 }
 

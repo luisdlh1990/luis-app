@@ -15,8 +15,9 @@ const getData = new Promise ((resolve, reject)=>{
         setTimeout(()=>{
            if(condition){
                if(id){
-                   const resultado = productos.filter(item => item.categoria == id)
+                   const resultado = productos.filter(item => item.categoria === parseInt(id))
                    resolve(resultado)
+                   console.log(resultado);
                }else{
                    resolve(productos) 
                }

@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import CartWidget from './CartWidget';
 import {Link} from 'react-router-dom';
+import CartContextProvider from './CartContext';
 import '../App.css';
 
 
@@ -85,7 +86,7 @@ const NavBar = () => {
            <Link to='/category/3' className='linkLogo'>Combos</Link>
           </Typography>
           
-          <CartWidget/>
+          <Link to='/cart'><CartWidget/></Link>
         </Toolbar>
 
       </Container>
