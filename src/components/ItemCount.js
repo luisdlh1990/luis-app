@@ -4,34 +4,34 @@ import '../App.css'
 
 
 
-const ItemCount = ({ stock = 100, initial = 0,  onAdd }) => {
-    const [add, setAdd] = useState(0);
+const ItemCount = ({ stock = 100, initial = 1,  onAdd }) => {
+    const [count, setCount] = useState(0);
     
 
     useEffect(() => {
-        setAdd(1);
+        setCount(initial);
     },[]);
 
     const increment = () => {
-        if (add < stock) {
-            setAdd(add + 1);
+        if (count < stock) {
+            setCount(count + 1);
         }
     }
     
     const decrement = () => {
-        if (add > initial) {
-            setAdd(add - 1);
+        if (count > initial+1) {
+            setCount(count - 1);
         }
     }
     return(
         <>
         <div className='btns'>
             <button onClick={increment}>+</button>
-            <div className='count'>{add}</div>
+            <div className='count'>{count}</div>
             <button onClick={decrement}>-</button>
             {
-                stock
-                ? <button onClick={() => onAdd(add)}>Add to Cart</button>
+                stock && count
+                ? <button onClick={() => onAdd(count)}>Add to Cart</button>
                 : <button >Add to Cart</button>
             }
         </div>
