@@ -1,48 +1,35 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import ItemList from "./ItemList";
-const productos = require('./productos').default;
-
-const ItemListContainer = ({greeting}) =>{
-
-const [listaProductos, setListaProductos]= useState([]);
-const [loading, setLoading] = useState(false);
-const {id} = useParams();
+import ItemList from './ItemList';
+import { useEffect, useState } from 'react';
+//import { useParams } from 'react-router';
+//import { firestoreFetch } from './firestoreFetch';
+import { collection, getDocs } from "firebase/firestore";
+import db from './firebaseConfig';
 
 
-const getData = new Promise ((resolve, reject)=>{
-        let condition = true;
-        setTimeout(()=>{
-           if(condition){
-               if(id){
-                   const resultado = productos.filter(item => item.categoria === parseInt(id))
-                   resolve(resultado)
-                   console.log(resultado);
-               }else{
-                   resolve(productos) 
-               }
-        }else{
-            reject()
-        }  
-        },2000)
-    })
-    useEffect(()=>{
-        setLoading(true)
-        getData
-        .then((Res)=>setListaProductos(Res))
-        .catch((err)=> console.log(err))
-        .finally(()=>setLoading(false))
-    }, [id])
+const ItemListContainer = () => {
+    const [datos, setDatos] = useState([]);
+    //const { idCategory } = useParams();
 
 
+    useEffect(() => {
+        const fireBaseFetch = async () =>{
+            const querySnapshot = await getDocs(collection(db, "products"));
+                querySnapshot.data.forEach((doc) => {
+                console.log(doc.id, " => ", doc.data());
+            });
+        };
+        fireBaseFetch();
+    }, [datos]);
 
-    return(
-       <>
-        <h2>lista de productos</h2>
-        {loading ? <img src="https://thumbs.gfycat.com/GeneralUnpleasantApisdorsatalaboriosa-size_restricted.gif" alt="cargando..."/> :<ItemList listaProductos={listaProductos}/> }
-        
-        
-       </> 
+
+    useEffect(() => {
+        return (() => {
+            setDatos([]);
+        })
+    }, []);
+
+    return (
+            <ItemList items={datos} />
     );
 }
 
