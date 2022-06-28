@@ -12,13 +12,13 @@ const ItemListContainer = () => {
 
 
     useEffect(() => {
-        const fireBaseFetch = async () =>{
+        const firebaseFetch = async () =>{
             const querySnapshot = await getDocs(collection(db, "products"));
-                querySnapshot.data.forEach((doc) => {
+                querySnapshot.forEach((doc) => {
                 console.log(doc.id, " => ", doc.data());
             });
         };
-        fireBaseFetch();
+        firebaseFetch();
     }, [datos]);
 
 
