@@ -48,7 +48,7 @@ const NavBar = () => {
               textDecoration: 'none',
             }}
           >
-           <Link to='/category/1' className='linkLogo'>Cañas</Link>
+           <Link to='/category/1' className='linkLogo'>Reeles</Link>
           </Typography>
           <Typography
             variant="h6"
@@ -65,7 +65,7 @@ const NavBar = () => {
               textDecoration: 'none',
             }}
           >
-           <Link to='/category/2' className='linkLogo'>Reeles</Link>
+           <Link to='/category/2' className='linkLogo'>Cañas</Link>
           </Typography>
           <Typography
             variant="h6"
@@ -85,7 +85,7 @@ const NavBar = () => {
            <Link to='/category/3' className='linkLogo'>Combos</Link>
           </Typography>
           
-          <CartWidget/>
+          <Link to='/cart'><CartWidget/></Link>
         </Toolbar>
 
       </Container>

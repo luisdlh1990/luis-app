@@ -1,16 +1,21 @@
 import '../App.css'
 import ItemCount from './ItemCount';
 import {Link} from 'react-router-dom';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { CartContext } from './CartContext';
 
 
 
 const ItemDetail =({item})=>{
     const [itemCount, setItemCount] = useState(0);
-    const {tittle, price, url} = item;
-    const onAdd = (add) => {
-        alert(`You have selected ${add} items`);
-        setItemCount(add);
+    const {tittle, price, url, stock} = item;
+    const test = useContext(CartContext);
+   
+   
+    const onAdd = (qty) => {
+        alert("agregaste " + qty + " items");
+        setItemCount(qty);
+        test.addToCart(item, qty);
     }
     return(
         <>  
@@ -20,10 +25,11 @@ const ItemDetail =({item})=>{
             <div>
                 <img src={url} alt={tittle} width='200px' height='200px'/>
             </div>
+            <h5>Stock: {stock} unidades</h5>
             <h5>Precio: ${price}</h5>      
             {
                 itemCount === 0
-                ? <ItemCount initial={itemCount} onAdd={onAdd} />
+                ? <ItemCount stock={item.stock} initial={itemCount} onAdd={onAdd} />
                 : <Link to='/cart'><button>Finalizar Compra</button></Link>
             }        
             </div>
