@@ -1,10 +1,50 @@
 import { useContext } from "react";
 import { CartContext } from "./CartContext";
 import {Link} from 'react-router-dom';
+import { serverTimestamp, setDoc, doc, collection, updateDoc, increment} from "firebase/firestore";
+import db from "./firebaseConfig";
 
 
 const Cart = () => {
 const test = useContext(CartContext);
+
+    const createOrder = ()=>{
+        const itemsForDB = test.cartList.map(item => ({
+            id: item.idItem,
+            price: item.costItem,
+            tittle: item.nameItem,
+            qty: item.qtyItem
+        }))
+
+        let order = {
+            buyer: {
+                email : "luisdlh1990@gmail.com",
+                name : "luis de la hoz",
+                phone: "154465614"
+            },
+            date: serverTimestamp(),
+            total: test.calcTotal(),
+            items: itemsForDB
+        }
+        console.log(order);
+
+        const createOrderInFirestore = async () => {
+            const newOrderRef = doc(collection(db, 'orders'));
+            await setDoc(newOrderRef, order);
+            return newOrderRef;
+        }
+        createOrderInFirestore()
+            .then(result => alert ('tu ID de orden es '+ result.id))
+            .catch(err => console.log(err))
+
+        test.cartList.forEach(async (item) => {
+            const itemRef = doc(db, "products", item.idItem);
+            await updateDoc(itemRef, {
+                stock: increment(-item.qtyItem)
+            })
+        });    
+        test.removeList();
+    }
     return (
         <>
         <div>
@@ -35,14 +75,14 @@ const test = useContext(CartContext);
         </div>
         <div>
             {
-                 test.cartList.length > 0 &&
-                 <div>
-                 <h3>Total De Compra</h3>
-                 <p>Impuestos: ${test.calcTaxes()}</p>
-                 <p>Impuestos: ${-test.calcTaxes()}</p>
-                 <p>Total Precio Final: ${test.calcTotal()}</p>
-                 <button >Finalizar Compra</button>
-                 </div>
+                test.cartList.length > 0 &&
+                <div>
+                <h3>Total De Compra</h3>
+                <p>Impuestos: ${test.calcTaxes()}</p>
+                <p>Impuestos: ${-test.calcTaxes()}</p>
+                <p>Total Precio Final: ${test.calcTotal()}</p>
+                <button onClick={createOrder}>Finalizar Compra</button>
+                </div>
             }
         </div>
 

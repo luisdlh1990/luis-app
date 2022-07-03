@@ -1,35 +1,41 @@
 import ItemList from './ItemList';
 import { useEffect, useState } from 'react';
-//import { useParams } from 'react-router';
-//import { firestoreFetch } from './firestoreFetch';
-import { collection, getDocs } from "firebase/firestore";
-import db from './firebaseConfig';
+import { useParams } from 'react-router';
+
+import { firestoreFetch } from './firestoreFetch';
 
 
 const ItemListContainer = () => {
-    const [datos, setDatos] = useState([]);
-    //const { idCategory } = useParams();
+    const [listaProductos, setListaProductos] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const {categoriaId} = useParams();
 
 
-    useEffect(() => {
-        const firebaseFetch = async () =>{
-            const querySnapshot = await getDocs(collection(db, "products"));
-                querySnapshot.forEach((doc) => {
-                console.log(doc.id, " => ", doc.data());
-            });
-        };
-        firebaseFetch();
-    }, [datos]);
 
+useEffect(()=>{
+    setLoading(true)
+    firestoreFetch(categoriaId)
+    .then((res)=>setListaProductos(res))
+    .catch((err)=> console.log(err))
+    .finally(()=>setLoading(false))
+},[categoriaId]);
 
-    useEffect(() => {
-        return (() => {
-            setDatos([]);
-        })
-    }, []);
+useEffect(() => {
+    return (() => {
+        setListaProductos([]);
+    })
+}, []);
+
 
     return (
-            <ItemList items={datos} />
+        <>
+        <h2>Lista de Productos</h2>
+        {
+        loading? <img src="https://thumbs.gfycat.com/GeneralUnpleasantApisdorsatalaboriosa-size_restricted.gif" alt="cargando..."/>  
+        :<ItemList listaProductos={listaProductos} />
+        }
+        </>
+        
     );
 }
 

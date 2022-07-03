@@ -1,17 +1,13 @@
-import { query, where, collection, getDocs } from '@firebase/firestore';
+import { query, where, collection, getDocs, orderBy } from '@firebase/firestore';
 import { doc, getDoc } from "firebase/firestore";
 import db from './firebaseConfig';
 
-export const firestoreFetch = async (idCategory) => {
+export const firestoreFetch = async (categoriaId) => {
     let q;
-    if (idCategory) {
-        const categoryDocRef = doc(db, "categoria", idCategory);
-        q = query(
-            collection(db, "products"),
-            where("categoria", "==", categoryDocRef)
-        );
+    if (categoriaId) {
+        q = query(collection(db, "products"), where('categoria','==',categoriaId));
     } else {
-        q = query(collection(db, "products"));
+        q = query(collection(db, "products"), orderBy('tittle'));
     }
     const querySnapshot = await getDocs(q);
     const dataFromFirestore = querySnapshot.docs.map(document => ({
@@ -22,16 +18,16 @@ export const firestoreFetch = async (idCategory) => {
 }
 
 export const firestoreFetchOne = async (idItem) => {
-    const docRef = doc(db, "products", idItem);
-    const docSnap = await getDoc(docRef);
-    
-    if (docSnap.exists()) {
-      let result = {
-        id: idItem,
-        ...docSnap.data()
+  const docRef = doc(db, "products", idItem);
+  const docSnap = await getDoc(docRef);
+  
+  if (docSnap.exists()) {
+      return {
+          id: idItem,
+          ...docSnap.data()
       }
-      return result;
-    } else {
+  } else {
+    
       console.log("No such document!");
-    }
+  }
 }

@@ -8,7 +8,7 @@ import { CartContext } from './CartContext';
 
 const ItemDetail =({item})=>{
     const [itemCount, setItemCount] = useState(0);
-    const {tittle, price, url} = item;
+    const {tittle, price, url, stock} = item;
     const test = useContext(CartContext);
    
    
@@ -25,6 +25,7 @@ const ItemDetail =({item})=>{
             <div>
                 <img src={url} alt={tittle} width='200px' height='200px'/>
             </div>
+            <h5>Stock: {stock} unidades</h5>
             <h5>Precio: ${price}</h5>      
             {
                 itemCount === 0
