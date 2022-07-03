@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/luis-app/static/css/main.ae8e38df.css",
+    "main.js": "/luis-app/static/js/main.12503044.js",
+    "index.html": "/luis-app/index.html",
+    "main.ae8e38df.css.map": "/luis-app/static/css/main.ae8e38df.css.map",
+    "main.12503044.js.map": "/luis-app/static/js/main.12503044.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ae8e38df.css",
+    "static/js/main.12503044.js"
+  ]
+}
