@@ -8,17 +8,17 @@ import { firestoreFetch } from './firestoreFetch';
 const ItemListContainer = () => {
     const [listaProductos, setListaProductos] = useState([]);
     const [loading, setLoading] = useState(false);
-    const {categoriaId} = useParams();
+    const {id} = useParams();
 
 
 
 useEffect(()=>{
     setLoading(true)
-    firestoreFetch(categoriaId)
+    firestoreFetch(id)
     .then((res)=>setListaProductos(res))
     .catch((err)=> console.log(err))
     .finally(()=>setLoading(false))
-},[categoriaId]);
+},[id]);
 
 useEffect(() => {
     return (() => {

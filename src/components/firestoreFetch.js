@@ -2,10 +2,10 @@ import { query, where, collection, getDocs, orderBy } from '@firebase/firestore'
 import { doc, getDoc } from "firebase/firestore";
 import db from './firebaseConfig';
 
-export const firestoreFetch = async (categoriaId) => {
+export const firestoreFetch = async (id) => {
     let q;
-    if (categoriaId) {
-        q = query(collection(db, "products"), where('categoria','==',categoriaId));
+    if (id) {
+        q = query(collection(db, "products"), where('categoria','==',id));
     } else {
         q = query(collection(db, "products"), orderBy('tittle'));
     }
