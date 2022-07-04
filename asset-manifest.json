@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/luis-app/static/css/main.ae8e38df.css",
-    "main.js": "/luis-app/static/js/main.12503044.js",
+    "main.js": "/luis-app/static/js/main.0d7836ae.js",
     "index.html": "/luis-app/index.html",
     "main.ae8e38df.css.map": "/luis-app/static/css/main.ae8e38df.css.map",
-    "main.12503044.js.map": "/luis-app/static/js/main.12503044.js.map"
+    "main.0d7836ae.js.map": "/luis-app/static/js/main.0d7836ae.js.map"
   },
   "entrypoints": [
     "static/css/main.ae8e38df.css",
-    "static/js/main.12503044.js"
+    "static/js/main.0d7836ae.js"
   ]
 }
